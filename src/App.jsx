@@ -17,7 +17,6 @@ function App() {
     <>
       <Routes>
         {<Route path="/" element={<Login />} />}
-        {<Route path="/register" element={<Register />} />}
         {<Route path="/home" element={<ChatContext><NavigationContext><Home /></NavigationContext></ChatContext>} />}
         {<Route path="/small" element={<MobileScreen></MobileScreen>}/>}
       </Routes>
