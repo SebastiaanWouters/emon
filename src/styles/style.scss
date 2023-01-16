@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100&display=swap');
+@import "node_modules/nord/src/sass/nord.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$nostr-purple: #613583;
+$nostr-purple: $nord0;
+$nostr-purple-glass: hsla(302, 51%, 31%, 0.66);
+$blue: rgba(89,63,251,1);
+$blue-glass: rgba(89,63,251,0.66);
+$nostr-purple-light: hsla(302, 51%, 90%, 1);
+$light-transparent: hsla(255, 100%, 100%, 0.66);
+$light-transparent-home: hsla(255, 100%, 100%, 0.46);
+$lighter-transparent: hsla(255, 100%, 100%, 0.36);
+$nostr-purple-lighter: hsla(302, 51%, 93%, 1);
+$border-radius: 0.4rem;
+$border-radius-small: 0.2rem;
+$font-size-small: 0.8rem;
+$font-size-medium: 1rem;
+$font-size-large: 1.4rem;
+$font-size-larger: 2rem;
+$font-size-mini: 0.6rem;
+$dark-text: rgb(20, 20, 20);
+$layout-breakpoint-small: 800px;
+$small: 1rem;
+$medium: 1.6rem;
+$large: 2rem;
+$larger: 3rem;
+$mini: 0.4rem;
+
+$background: url("../img/background.svg");
+$darker: rgba(0,0,0,0.1);
+$darkerr: rgba(0,0,0,0.15);
+$darkerrr: rgba(0,0,0,0.2);
+$darkerrrr: rgba(0,0,0,0.3);
+$darkerrrrr: rgba(0,0,0,0.4);
+$darkerrrrrr: rgba(0,0,0,0.5);
+$darkerrrrrrr: rgba(0,0,0,0.6);
+$lighter: rgba(255, 255, 255, 0.1);
+$lighterr: rgba(255, 255, 255, 0.2);
+$lighterrr: rgba(255, 255, 255, 0.3);
+$lighterrrr: rgba(255, 255, 255, 0.4);
+$lighterrrrr: rgba(255, 255, 255, 0.55);
+$lighterrrrrr: rgba(255, 255, 255, 0.7);
+$accent: #fef1be;
+$dark: #3b304d;
+$light: $nord4;
+$box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+$box-shadow-mini-dark: 0 0 $mini $dark;
+$box-shadow-mini: 0 0 $mini $darkerrr;
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background: $accent;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    background: transparent;
+}
+ 
+::-webkit-scrollbar-thumb:window-inactive {
+	background: transparent; 
+}
+
+
+.mobileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: $background;
+    background-size: cover;
+    .mobileCard {
+        color: $light;
+        font-size: $large;
+        max-width: 80%;
+        text-align: center;
+        background-color: $darkerrrrrrr;
+        border-radius: $medium;
+        padding: $large $large;
+        box-shadow: $box-shadow;
+
+    }
+}
+
+
+
+.loginContainer {
+    background: $accent;
+    background-image: $background;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    .loginButton {
+        padding: $large $large;
+        background-color: $darkerrrr;
+        backdrop-filter: blur(10px);
+        border-radius: $large;
+        text-transform:uppercase;
+        font-weight: 800;
+        font-size: 2rem;
+        box-shadow: 0 0 $mini rgba(10, 10 , 10, 1);
+        transition: all 0.2s ease-in-out;
+        color: $nord5;
+        &:hover {
+          transform: scale(1.13);
+          font-size: 2.5rem;  
+          color: $nord0;
+          background-color: $lighterrrrrr;
+        }
+        &:active {
+          transform: scale(1.15);
+        }
+    }
+}
+
+
+
+
+.home {
+    background-image: $background;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        background-color: transparent;
+        border-radius: $border-radius;
+        width: 70%;
+        height: 80%;
+        display: flex;
+
+        
+        gap: $larger;
+
+        .sidebar {
+            flex: 1;
+            background: $darkerrrrrr;
+            backdrop-filter: blur(16.5px);
+            -webkit-backdrop-filter: blur(50px);
+            /*background-color: $darkerr;*/
+            border-radius: $border-radius;
+            display: flex;
+            flex-direction: column;
+            box-shadow: $box-shadow;
+            .navbar {
+                display: flex;
+                align-items: center;
+                background-color: $darkerrrrr;
+                flex: 1;
+                padding: $mini $small;
+                justify-content: space-between;
+                color: $light;
+                max-height: 60px;
+                min-height: 60px;
+                border-top-right-radius: $border-radius;
+                border-top-left-radius: $border-radius;
+
+                .logo {
+                    font-weight: bold;
+                }
+
+                .user {
+                    display: flex;
+                    gap: 10px;
+
+                    img {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    button {
+                        background-color: $lighterrrr;
+                        color: $dark;
+                        font-size: $font-size-small;
+                        border: none;
+                        cursor: pointer;
+                        border-radius: $border-radius-small;
+                    }
+                    span {
+                        font-family: 'Inter';
+                        font-weight: 600;
+                    }
+                }
+                
+            }
+            .search {
+                flex: 8.1;
+                .searchForm {
+                    padding: $small;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    input {
+                        background-color: $darkerr;
+                        padding: $small;
+                        border: none;
+                        color: $light;
+                        outline: none;
+                        font-size: $small;
+                        width: 100%;
+                        border-radius: $medium;
+                        &::placeholder {
+                            color: white;
+                        }
+                    }
+                }
+            }
+            .userChat {
+                border:none;
+                padding: $small $medium;
+                display: flex;
+                align-items: center;
+                gap: $small;
+                color: $light;
+                cursor: pointer;
+                border-radius: $medium;
+                background-color: $darkerrr;
+                margin: $small;
+                width: 90%;
+                &.active {
+                    background-color: $lighterrrr;
+                }
+                img{
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                .userChatInfo{
+                    span{
+                        font-size: $font-size-medium;
+                        font-weight: 600;
+                    }
+                    p{
+                        font-size: $font-size-small;
+                        color: $light;
+
+                    }
+                }
+            }
+
+            .searchUserChat {
+                padding: $medium $medium;
+                display: flex;
+                align-items: center;
+                gap: $small;
+                color: $light;
+                cursor: pointer;
+                border-radius: $medium;
+                background-color: $darkerrr;
+                margin: $small;
+
+                &:hover {
+                    background-color: $lighterrr;
+                }
+                img{
+                    width: 1.8rem;
+                    height: 1.8rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-top: -4px;
+                }
+                .SearchUserChatInfo{
+                    span{
+                        font-size: $font-size-medium;
+                        font-weight: 600;
+                    }
+                    p{
+                        font-size: $font-size-small;
+                        color: $light;
+
+                    }
+                }
+                .addButton {
+                    border: none;
+                    background-color: transparent;
+                    margin-left: auto;
+                    cursor: pointer;
+                    padding: 0;
+                    margin-top: 0.3rem;
+                }
+            }
+
+            .chats {
+                flex: 8.1;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                
+            }
+            .bottomBar {
+                flex: 0.77;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: $mini $small;
+                border-bottom-left-radius: $border-radius;
+                border-bottom-right-radius: $border-radius;
+                .relative {
+                    button {
+                        background-color: transparent;
+                        border: none;
+                        cursor: pointer;
+                        transition: all 0.6s;
+                        margin-top: $mini;
+                        &:focus-visible {
+                            outline: none;
+                        }
+                        &:hover {
+                            outline: none;
+                            transform: scale(1.08);
+                            border-radius: 50%;
+                        }
+                        
+                    }
+                }
+            
+                .panel {
+                    position: absolute;
+                    bottom: 3.5rem;
+                    left: -0.3rem;
+                    border-radius: $border-radius;
+                    overflow: hidden;
+                    transition: all 2s;
+                    .panel-grid {
+                        background-color: $lighterrrrr;
+                        color: $dark;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        height: 5vh;
+                        a {
+                            padding: $larger $larger;
+                            transition: all 0.3s;
+                            &:hover {
+                                background-color: $lighterr;
+                                cursor: pointer;
+                            }
+                            &:active {
+                                background-color: $lighterrrr;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+        .chatComp {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            box-shadow: $box-shadow;
+            overflow: hidden;
+            border-radius: $border-radius;
+            /*background-color: $darkerr;*/
+            background: $darkerrrrrr;
+            backdrop-filter: blur(16.5px);
+            -webkit-backdrop-filter: blur(50px);
+
+            .chatInfo {
+                flex: 1;
+                display: flex;
+                background-color: $darkerrrrr;
+                align-items: center;
+                justify-content: space-between;
+                padding: $mini $small;
+                color: $light;
+                max-height: 60px;
+                min-height: 60px;
+                font-weight: bold;
+
+                .chatIcons {
+                    display: flex;
+                    gap: $mini;
+    
+                    img {
+                        height: $medium;
+                        cursor: pointer;
+                    }
+                }
+            }
+            
+
+            .messages {
+                display: flex;
+                flex-direction: column-reverse;
+                flex: 10;
+                background-color: transparent;
+                height: calc(100% - 100px - (4 * $mini) - (2 * $small));
+                overflow-y: scroll;
+                padding: $small;
+                .chat {
+                    &.owner {
+                        display: flex;
+                        align-items: flex-end;
+                    }
+                    .chat-bubble {
+                        background-color: $darkerrrrrr;
+                        color: $light;
+                        &.owner {
+                            background-color: $lighterrrrrr;
+                            color: $dark;
+                        }
+                    }
+                        
+                }
+                
+            }
+
+            .inputComp {
+                flex: 1;
+                background-color: $darkerr;
+                padding: $mini $small;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                
+
+                input {
+                    background-color: transparent;
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    color: $light;
+                    font-size: $small;
+                    &::placeholder {
+                        color: $light;
+                    }
+                    
+                }
+
+                .send {
+                    button {
+                        border: none;
+                        cursor: pointer;
+                        margin-top: 0.2rem;
+                    }
+                    &:active {
+                        transform: scale(1.03);
+                    }
+                }
+
+            }
+        }
+    }
+}

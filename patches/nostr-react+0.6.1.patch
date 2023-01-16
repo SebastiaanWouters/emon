@@ -1,0 +1,47 @@
+diff --git a/node_modules/nostr-react/src/core.tsx b/node_modules/nostr-react/src/core.tsx
+index c5e98f6..7710892 100644
+--- a/node_modules/nostr-react/src/core.tsx
++++ b/node_modules/nostr-react/src/core.tsx
+@@ -139,6 +139,7 @@ export function useNostrEvents({
+   })
+ 
+   let onEventCallback: null | OnEventFunc = null
++  let onAllFetchedCallback: null | OnAllFetchedFunc = null
+   let onSubscribeCallback: null | OnSubscribeFunc = null
+ 
+   // Lets us detect changes in the nested filter object for the useEffect hook
+@@ -169,6 +170,10 @@ export function useNostrEvents({
+     }
+ 
+     setUnsubscribe(() => unsubscribeFunc)
++      onAllFetchedCallback?.()
++    sub.on('eose', () => {
++      
++    })
+ 
+     sub.on("event", (event: NostrEvent) => {
+       log(debug, "info", `⬇️ nostr (${relay.url}): Received event:`, event)
+@@ -221,5 +226,10 @@ export function useNostrEvents({
+         onEventCallback = _onEventCallback
+       }
+     },
++    onAllFetched: (_onAllFetchedCallback: OnAllFetchedFunc) => {
++      if (_onAllFetchedCallback) {
++        onAllFetchedCallback = _onAllFetchedCallback
++      }
++    },
+   }
+ }
+diff --git a/node_modules/nostr-react/src/useProfile.tsx b/node_modules/nostr-react/src/useProfile.tsx
+index 1a9e55c..cdc098e 100644
+--- a/node_modules/nostr-react/src/useProfile.tsx
++++ b/node_modules/nostr-react/src/useProfile.tsx
+@@ -83,6 +83,8 @@ export function useProfile({ pubkey }: { pubkey: string }) {
+ 
+   onEvent((rawMetadata) => {
+     try {
++      console.log(rawMetadata.content)
++      console.error("err", rawMetadata)
+       const metadata: Metadata = JSON.parse(rawMetadata.content)
+       const metaPubkey = rawMetadata.pubkey
+ 
