@@ -12,7 +12,7 @@
     "@headlessui/react": "^1.7.7",
     "daisyui": "^2.46.1",
     "nord": "^0.2.1",
-    "nostr-react": "github:SebastiaanWouters/nostr-react",
+    "nostr-react": "https://github.com/SebastiaanWouters/nostr-react.git",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6",
