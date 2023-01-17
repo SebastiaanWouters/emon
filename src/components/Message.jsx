@@ -11,7 +11,7 @@ export const Message = ({owner, content, pk, id}) => {
   const { pubkey, picture } = useContext(userContext);
   const { currentUserPubkey, currentUserName, currentUserPicture } = useContext(chatContext);
   const messageClass = owner ? "m-2 chat chat-start owner" : "m-2 chat chat-end";
-  const textClass = owner ? "chat-bubble text-base flex owner p-2.5" : "chat-bubble text-base flex p-2.5";
+  const textClass = owner ? "chat-bubble text-base flex owner p-2.5 shadow-xl" : "chat-bubble text-base flex p-2.5 shadow-xl";
   
 
   return (

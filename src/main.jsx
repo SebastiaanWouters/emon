@@ -7,7 +7,7 @@ import { NostrProvider } from "nostr-react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const relayUrls = [
-  "wss://nostr-pub.wellorder.net", "wss://relay.damus.io",
+  "wss://nostr-pub.wellorder.net", "wss://relay.damus.io", "wss://relay.nostr.info", "wss://relay.snort.social"
 ];
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

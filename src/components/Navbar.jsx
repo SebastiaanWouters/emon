@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import User from '../img/user.png'
+import Emon from '../img/emon.svg'
 import { useNavigate } from 'react-router-dom'
 import { userContext } from '../contexts/useUserContext';
 import { useContext } from 'react';
@@ -11,7 +11,7 @@ export const Navbar = () => {
 
   return (
     <div className='navbar'>
-    <span className="logo">emon</span>
+    <img className="logo" src={Emon} alt="" />
     <div className="user">
         <img src={picture} alt="" />
         <span className='hidden lg:flex'>{username}</span>

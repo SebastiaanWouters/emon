@@ -34,7 +34,7 @@ $lighterrrr: rgba(255, 255, 255, 0.4);
 $lighterrrrr: rgba(255, 255, 255, 0.55);
 $lighterrrrrr: rgba(255, 255, 255, 0.7);
 $accent: #790d91;
-$dark: #3b304d;
+$dark: #333333;
 $light: #dcd7e1;
 $box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 $box-shadow-mini-dark: 0 0 $mini $dark;
@@ -154,7 +154,8 @@ body {
                 border-top-left-radius: $border-radius;
 
                 .logo {
-                    font-weight: bold;
+                    width: $large;
+                    height: $large;
                 }
 
                 .user {
@@ -191,16 +192,16 @@ body {
                     justify-content: center;
                     align-items: center;
                     input {
-                        background-color: $darkerr;
+                        background-color: $lighterrrrrr;
                         padding: $small;
                         border: none;
-                        color: $light;
+                        color: $dark;
                         outline: none;
                         font-size: $small;
                         width: 100%;
                         border-radius: $medium;
                         &::placeholder {
-                            color: white;
+                            color: $dark;
                         }
                     }
                 }
@@ -217,8 +218,13 @@ body {
                 background-color: $darkerrr;
                 margin: $small;
                 width: 90%;
+                transition: all 0.2s ease-in-out;
                 &.active {
                     background-color: $lighterrrr;
+                }
+                &:hover {
+                    box-shadow: 0 0 0.2rem rgba(160, 160, 160, 0.5);
+                    transform: scale(1.005);
                 }
                 img{
                     width: 3rem;
@@ -249,9 +255,12 @@ body {
                 border-radius: $medium;
                 background-color: $darkerrr;
                 margin: $small;
+                transition: all 0.2s ease-in-out;
 
                 &:hover {
                     background-color: $lighterrr;
+                    transform: scale(1.006);
+                    box-shadow: $box-shadow;
                 }
                 img{
                     width: 1.8rem;
@@ -278,6 +287,12 @@ body {
                     cursor: pointer;
                     padding: 0;
                     margin-top: 0.3rem;
+                    transition: all 0.15s ease-in-out;
+                    &:hover {
+                        transform: scale(1.3);
+                        filter: drop-shadow(0 0 $large #333333);
+                        -webkit-filter: drop-shadow(0 0 $large #333333);
+                    }
                 }
             }
 
@@ -300,7 +315,7 @@ body {
                         background-color: transparent;
                         border: none;
                         cursor: pointer;
-                        transition: all 0.3s;
+                        transition: all 0.2s;
                         margin-top: $mini;
                         &:focus-visible {
                             outline: none;
@@ -322,7 +337,7 @@ body {
                     overflow: hidden;
                     transition: all 2s;
                     .panel-grid {
-                        background-color: $lighterrrrr;
+                        background-color: transparent;
                         color: $dark;
                         display: flex;
                         flex-direction: column;
@@ -331,13 +346,19 @@ body {
                         height: 5vh;
                         a {
                             padding: $larger $larger;
-                            transition: all 0.3s;
+                            transition: all 0.3s ease-in-out;
+                            background-color: $darkerrrrrr;
+                            color: $light;
                             &:hover {
-                                background-color: $lighterr;
+                                background-color: $lighterrrrr;
+                                color: $dark;
+                                transform: scale(1.01);
+                                font-size: 1.1rem;
                                 cursor: pointer;
+                                box-shadow: $box-shadow;
                             }
                             &:active {
-                                background-color: $lighterrrr;
+                                background-color: $lighterr;
                             }
                             
                         }
@@ -423,6 +444,7 @@ body {
                 
 
                 input {
+                    margin: 0 $small 0 $mini;
                     background-color: transparent;
                     width: 100%;
                     border: none;

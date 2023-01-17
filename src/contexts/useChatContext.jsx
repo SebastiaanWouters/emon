@@ -72,7 +72,7 @@ const ChatProvider = (props) => {
       if (outDone.current && currentUserPubkey !== event.pubkey) {
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
-        latestSeen.current = evet.created_at;
+        latestSeen.current = event.created_at;
       }
     })
 
