@@ -31,7 +31,12 @@ export const Search = () => {
 
   const addUser = () => {
     setCurrentUserPubkey(searchedUserData.pubkey);
-    setCurrentUserPicture(JSON.parse(searchedUserData.content).picture ? JSON.parse(searchedUserData.content).picture : User);
+    try {
+      setCurrentUserPicture(JSON.parse(searchedUserData.content).picture ? encodeURI(JSON.parse(searchedUserData.content).picture) : User);
+    } catch {
+      setCurrentUserPicture(User);
+    }
+    
     setCurrentUserName(JSON.parse(searchedUserData.content).name ? JSON.parse(searchedUserData.content).name : `user${searchedUserData.pubkey}` ),
     setIsSearching(false);
   }

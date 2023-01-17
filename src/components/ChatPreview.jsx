@@ -19,9 +19,6 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
         console.log("updating chat context");
     }
 
-    const { data : userData } = useProfile({
-      pubkey: chatuserpubkey
-    })
 
      const { onEvent: onNewUser } = useNostrEvents({
       filter: {
@@ -34,7 +31,11 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
     onNewUser((metaData) => {
       const user = JSON.parse(metaData.content);
       setPreviewUserName(user.name ? user.name : `user${chatuserpubkey.slice(0,5)}`);
-      setPreviewUserPicture(user.picture ? user.picture : User);
+      try {
+        setPreviewUserPicture(user.picture ? encodeURI(user.picture) : User);
+    } catch {
+        setPreviewUserPicture(User);
+    }
     })
 
     return (

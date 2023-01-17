@@ -22,7 +22,12 @@ const UserProvider = (props) => {
     onNewUser((metaData) => {
         const user = JSON.parse(metaData.content);
         setUsername(user.name ? user.name : `user${pubkey.slice(0,5)}`);
-        setPicture(user.picture ? user.picture : User);
+        try {
+            setPicture(user.picture ? encodeURI(user.picture) : User);
+        } catch {
+            setPicture(User);
+        }
+        
     })
 
     return (
