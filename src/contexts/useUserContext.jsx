@@ -8,7 +8,7 @@ export const userContext = createContext(null);
 
 const UserProvider = (props) => {
     // this state will be shared with all components 
-    const [pubkey, setPubkey] = useState(getLocalStorage("chatr-pubkey", ""));
+    const [pubkey, setPubkey] = useState(getLocalStorage("emon-pubkey", ""));
     const [username, setUsername] = useState("");
     const [picture, setPicture] = useState(User)
 

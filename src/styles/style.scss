@@ -4,16 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-$nostr-purple: #613583;
-$nostr-purple: $nord0;
-$nostr-purple-glass: hsla(302, 51%, 31%, 0.66);
-$blue: rgba(89,63,251,1);
-$blue-glass: rgba(89,63,251,0.66);
-$nostr-purple-light: hsla(302, 51%, 90%, 1);
-$light-transparent: hsla(255, 100%, 100%, 0.66);
-$light-transparent-home: hsla(255, 100%, 100%, 0.46);
-$lighter-transparent: hsla(255, 100%, 100%, 0.36);
-$nostr-purple-lighter: hsla(302, 51%, 93%, 1);
+
 $border-radius: 0.4rem;
 $border-radius-small: 0.2rem;
 $font-size-small: 0.8rem;
@@ -22,7 +13,6 @@ $font-size-large: 1.4rem;
 $font-size-larger: 2rem;
 $font-size-mini: 0.6rem;
 $dark-text: rgb(20, 20, 20);
-$layout-breakpoint-small: 800px;
 $small: 1rem;
 $medium: 1.6rem;
 $large: 2rem;
@@ -43,9 +33,9 @@ $lighterrr: rgba(255, 255, 255, 0.3);
 $lighterrrr: rgba(255, 255, 255, 0.4);
 $lighterrrrr: rgba(255, 255, 255, 0.55);
 $lighterrrrrr: rgba(255, 255, 255, 0.7);
-$accent: #fef1be;
+$accent: #790d91;
 $dark: #3b304d;
-$light: $nord4;
+$light: #dcd7e1;
 $box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 $box-shadow-mini-dark: 0 0 $mini $dark;
 $box-shadow-mini: 0 0 $mini $darkerrr;
@@ -83,7 +73,7 @@ body {
         text-align: center;
         background-color: $darkerrrrrrr;
         border-radius: $medium;
-        padding: $large $large;
+        padding: $medium $medium;
         box-shadow: $box-shadow;
 
     }
@@ -133,7 +123,7 @@ body {
     .container {
         background-color: transparent;
         border-radius: $border-radius;
-        width: 70%;
+        width: max(70%, 61rem);
         height: 80%;
         display: flex;
 
@@ -310,7 +300,7 @@ body {
                         background-color: transparent;
                         border: none;
                         cursor: pointer;
-                        transition: all 0.6s;
+                        transition: all 0.3s;
                         margin-top: $mini;
                         &:focus-visible {
                             outline: none;
@@ -351,6 +341,12 @@ body {
                             }
                             
                         }
+                    }
+                }
+                .newChat {
+                    transition: all 0.1s;
+                    &:hover{
+                        transform: scale(1.08);
                     }
                 }
             }

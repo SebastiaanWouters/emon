@@ -11,10 +11,10 @@ export const Navbar = () => {
 
   return (
     <div className='navbar'>
-    <span className="logo">Chatr</span>
+    <span className="logo">emon</span>
     <div className="user">
         <img src={picture} alt="" />
-        <span>{username}</span>
+        <span className='hidden lg:flex'>{username}</span>
     </div>
     
     </div>

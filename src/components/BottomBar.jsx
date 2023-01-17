@@ -19,7 +19,7 @@ export const BottomBar = () => {
   }
 
   const logout = () => {
-    setPubkey(""); setLocalStorage("chatr-pubkey", "");
+    setPubkey(""); setLocalStorage("emon-pubkey", "");
   } 
 
   return (
@@ -50,7 +50,7 @@ export const BottomBar = () => {
             <img src={Plus} alt="" />
         </button> : <button onClick={toggleSearching} className="newChat">
             <img src={Stop} alt="" />
-      </button>}
+        </button>}
 
       {pubkey === "" && <Navigate to="/" replace={true} />}
     </div>

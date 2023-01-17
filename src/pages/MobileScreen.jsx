@@ -6,7 +6,7 @@ export const MobileScreen = () => {
   return (
     <>
     <div className='mobileContainer'>
-        <div className="card w-96 bg-neutral shadow-lg text-neutral-content">
+        <div className="card w-60 md:w-96 bg-neutral shadow-lg text-neutral-content">
         <div className="card-body bg-transparent items-center text-center">
             <div className="alert mt-1 bg-transparent">
             <div className='flex flex-col py-1 bg-transparent'>
