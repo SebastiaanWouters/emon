@@ -24,8 +24,7 @@ const ChatProvider = (props) => {
     const [currentUserDecryptedChatData, setCurrentUserDecryptedChatData] = useState("");
     const [sortedChatPartners, setSortedChatPartners] = useState([]);
     const [messageData, setMessageData] = useState([]);
-    const latestInseen = useRef(1633426447);
-    const latestOutseen = useRef(1633426447);
+    const latestSeen = useRef(1633426447);
     let inDone = useRef(false);
     let outDone = useRef(false);
     const [cachedMessages, setCachedMessages] = useState([]);
@@ -38,7 +37,7 @@ const ChatProvider = (props) => {
       filter: {
         kinds: [4],
         authors: [pubkey],
-        since: latestInseen.current
+        since: latestSeen.current
       },
     })
 
@@ -46,7 +45,7 @@ const ChatProvider = (props) => {
       filter: {
         kinds: [4],
         "#p": [pubkey],
-        since: latestOutseen.current
+        since: latestSeen.current
       },
     })
 
@@ -66,19 +65,19 @@ const ChatProvider = (props) => {
     })
 
     onOutgoingEvent((event) => {
-      if (outDone.current && event.created_at > latestOutseen.current) {
+      if (outDone.current) {
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
-        latestOutseen.current = event.created_at
+        latestSeen.current = event.created_at;
         console.log("new outgoing");
       }
     })
 
     onIncomingEvent((event) => {
-      if (outDone.current && currentUserPubkey !== pubkey && event.created_at > latestInseen.current) {
+      if (outDone.current && currentUserPubkey !== event.pubkey) {
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
-        setMessageData(prev => [event, ...prev]);
-        latestInseen.current = event.created_at;
+        setMessageData(prev => uniqBy([event, ...prev], "id"));
+        latestSeen.current = evet.created_at;
         console.log("new incoming");
       }
     })
@@ -89,6 +88,7 @@ const ChatProvider = (props) => {
         const sortedEvents = incomingEvents.concat(outgoingEvents).map(event => ({...event, "sig":""})).sort((a, b) => (a.created_at > b.created_at) ? -1 : 1);
         setSortedChatPartners(uniqBy(sortedEvents.map((event) => ({"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at})), "pubkey"));
         setMessageData(uniqBy(sortedEvents, "id"));
+        latestSeen.current = dateToUnix(new Date());
       }
       
     }, [inDone.current, outDone.current])
