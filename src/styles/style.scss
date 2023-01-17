@@ -79,6 +79,21 @@ body {
     }
 }
 
+@keyframes wipe-enter {
+    0% { transform: rotate(0deg); }
+   80% { transform: rotate(0deg); }
+   85% { transform: rotate(5deg); }
+   95% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+	0% {
+		transform: scale(0, .025);
+	}
+	50% {
+		transform: scale(1, .025);
+	}
+}
+
+
 
 
 .loginContainer {
@@ -89,7 +104,7 @@ body {
 
     .loginButton {
         padding: $large $large;
-        background-color: $darkerrrr;
+        background-color: $darkerrrrr;
         backdrop-filter: blur(10px);
         border-radius: $large;
         text-transform:uppercase;
@@ -98,18 +113,19 @@ body {
         box-shadow: 0 0 $mini rgba(10, 10 , 10, 1);
         transition: all 0.2s ease-in-out;
         color: $nord5;
+
         &:hover {
           transform: scale(1.13);
           font-size: 2.5rem;  
           color: $nord0;
           background-color: $lighterrrrrr;
+          box-shadow: 0 0 $medium $mini $lighterrrrr;
         }
         &:active {
           transform: scale(1.15);
         }
     }
 }
-
 
 
 
@@ -156,6 +172,7 @@ body {
                 .logo {
                     width: $large;
                     height: $large;
+                    @apply animate-pulse;
                 }
 
                 .user {
@@ -256,6 +273,7 @@ body {
                 background-color: $darkerrr;
                 margin: $small;
                 transition: all 0.2s ease-in-out;
+                
 
                 &:hover {
                     background-color: $lighterrr;
