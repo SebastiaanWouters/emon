@@ -7,10 +7,11 @@ import { useNostrEvents, useProfile } from "nostr-react";
 
 export const ChatPreview = ({chatuserpubkey, active}) => {
     const { pubkey } = useContext(userContext);
-    const { setCurrentUserPubkey, setCurrentUserPicture, setCurrentUserName} = useContext(chatContext);
+    const { setCurrentUserPubkey, setCurrentUserPicture, setCurrentUserName, userNotifications} = useContext(chatContext);
     const [previewUserName, setPreviewUserName] = useState(`E${chatuserpubkey.slice(0,5)}`);
     const [previewUserPicture, setPreviewUserPicture] = useState(`https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
     const activeClass = active ? "active shadow-xl" : "shadow";
+    const [newMessage, setNewMessage] = useState(false);
 
     const updateChatContext = () => {
         setCurrentUserPubkey(chatuserpubkey);
@@ -37,6 +38,15 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
       }
     }, [userData])
 
+    useEffect(() => {
+      if (userNotifications[chatuserpubkey]) {
+        console.log("showing notification");
+        setNewMessage(true);
+      } else {
+        setNewMessage(false);
+      }
+    }, [userNotifications])
+
 
     /*onNewUser((metaData) => {
       const user = JSON.parse(metaData.content);
@@ -49,12 +59,13 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
     })*/
 
     return (
-        <button onClick={updateChatContext} className={`userChat ${activeClass}`}>
+        <div onClick={updateChatContext} className={`userChat ${activeClass}`}>
             <img src={previewUserPicture} alt="" />
             <div className="userChatInfo">
-            <span className=''>{previewUserName}</span>
-            {/*<p>{"Yo"}</p>*/}
+                <span className=''>{previewUserName}</span>
+                {newMessage && <div className="notification-indicator"></div> }
+              
             </div>
-        </button>
+        </div>
     )
 }

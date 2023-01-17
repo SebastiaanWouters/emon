@@ -161,18 +161,17 @@ body {
                 align-items: center;
                 background-color: $darkerrrrr;
                 flex: 1;
-                padding: $mini $small;
                 justify-content: space-between;
                 color: $light;
                 max-height: 60px;
                 min-height: 60px;
                 border-top-right-radius: $border-radius;
                 border-top-left-radius: $border-radius;
+                padding: $small $small;
 
                 .logo {
                     width: $large;
                     height: $large;
-                    @apply animate-pulse;
                 }
 
                 .user {
@@ -228,13 +227,14 @@ body {
                 padding: $small $medium;
                 display: flex;
                 align-items: center;
+                justify-content: flex-start;
                 gap: $small;
                 color: $light;
                 cursor: pointer;
                 border-radius: $medium;
                 background-color: $darkerrr;
                 margin: $small;
-                width: 90%;
+                width: auto;
                 transition: all 0.2s ease-in-out;
                 &.active {
                     background-color: $lighterrrr;
@@ -250,6 +250,10 @@ body {
                     object-fit: cover;
                 }
                 .userChatInfo{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
                     span{
                         font-size: $font-size-medium;
                         font-weight: 600;
@@ -259,7 +263,16 @@ body {
                         color: $light;
 
                     }
+                    .notification-indicator {
+                        min-width: $small;
+                        min-height: $small;
+                        border-radius: 50%;
+                        background: $accent;
+                        @apply animate-pulse;
+                        opacity: 10%;
+                    }
                 }
+                
             }
 
             .searchUserChat {

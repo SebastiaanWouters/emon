@@ -27,6 +27,7 @@ const ChatProvider = (props) => {
     const latestSeen = useRef(1633426447);
     let inDone = useRef(false);
     let outDone = useRef(false);
+    let [userNotifications, setUserNotifications] = useState({})
     const [cachedMessages, setCachedMessages] = useState([]);
 
     const { pubkey } = useContext(userContext);
@@ -69,12 +70,21 @@ const ChatProvider = (props) => {
     })
 
     onIncomingEvent((event) => {
-      if (outDone.current && currentUserPubkey !== event.pubkey) {
+      if (outDone.current && pubkey !== event.pubkey) {
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = event.created_at;
       }
+      if (event.created_at  > dateToUnix(new Date()) - 30) {
+        setUserNotifications(prev => ({...prev, [event.pubkey] : true}))
+        console.log('notification');
+      }
     })
+
+    useEffect(() => {
+        setUserNotifications(prev => ({...prev, [currentUserPubkey] : false}));
+        console.log('removing notification')
+    }, [currentUserPubkey, messageData])
 
     useEffect(() => {
       if (inDone.current && outDone.current) {
@@ -121,7 +131,7 @@ const ChatProvider = (props) => {
    
     return (
         // this is the provider providing state
-        <chatContext.Provider value={{currentUserPubkey, setCurrentUserPubkey, currentUserName, currentUserPicture, setCurrentUserPicture, setCurrentUserName, currentUserDecryptedChatData, sortedChatPartners}}>
+        <chatContext.Provider value={{currentUserPubkey, setCurrentUserPubkey, currentUserName, currentUserPicture, setCurrentUserPicture, setCurrentUserName, currentUserDecryptedChatData, sortedChatPartners, userNotifications}}>
             {props.children}
         </chatContext.Provider>
     );
