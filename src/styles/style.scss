@@ -57,7 +57,8 @@ $box-shadow-mini: 0 0 $mini $darkerrr;
 }
 body {
     font-family: 'Inter', sans-serif;
-    background: $accent;
+    background-image: $background;
+    background-size: cover;
 }
 
 /* Let's get this party started */
@@ -75,8 +76,6 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-image: $background;
-    background-size: cover;
     .mobileCard {
         color: $light;
         font-size: $large;
@@ -93,9 +92,6 @@ body {
 
 
 .loginContainer {
-    background: $accent;
-    background-image: $background;
-    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,8 +124,7 @@ body {
 
 
 .home {
-    background-image: $background;
-    background-size: cover;
+    
     height: 100vh;
     display: flex;
     justify-content: center;
