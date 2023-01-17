@@ -21,11 +21,11 @@ const UserProvider = (props) => {
 
     onNewUser((metaData) => {
         const user = JSON.parse(metaData.content);
-        setUsername(user.name ? user.name : `user${pubkey.slice(0,5)}`);
+        setUsername(user.name ? user.name : `E${pubkey.slice(0,5)}`);
         try {
-            setPicture(user.picture ? encodeURI(user.picture) : User);
+            setPicture(user.picture ? encodeURI(user.picture) : `https://avatars.dicebear.com/v2/avataaars/${pubkey.slice(0,5)}.svg`);
         } catch {
-            setPicture(User);
+            setPicture(`https://avatars.dicebear.com/v2/avataaars/${pubkey.slice(0,5)}.svg`);
         }
         
     })

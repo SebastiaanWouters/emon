@@ -32,12 +32,12 @@ export const Search = () => {
   const addUser = () => {
     setCurrentUserPubkey(searchedUserData.pubkey);
     try {
-      setCurrentUserPicture(JSON.parse(searchedUserData.content).picture ? encodeURI(JSON.parse(searchedUserData.content).picture) : User);
+      setCurrentUserPicture(JSON.parse(searchedUserData.content).picture ? encodeURI(JSON.parse(searchedUserData.content).picture) : `https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
     } catch {
-      setCurrentUserPicture(User);
+      setCurrentUserPicture(`https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
     }
     
-    setCurrentUserName(JSON.parse(searchedUserData.content).name ? JSON.parse(searchedUserData.content).name : `user${searchedUserData.pubkey}` ),
+    setCurrentUserName(JSON.parse(searchedUserData.content).name ? JSON.parse(searchedUserData.content).name : `E${searchedUserData.pubkey}` ),
     setIsSearching(false);
   }
 

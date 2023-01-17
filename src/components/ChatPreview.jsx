@@ -30,11 +30,11 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
 
     onNewUser((metaData) => {
       const user = JSON.parse(metaData.content);
-      setPreviewUserName(user.name ? user.name : `user${chatuserpubkey.slice(0,5)}`);
+      setPreviewUserName(/*user.name ? user.name : */`E${chatuserpubkey.slice(0,5)}`);
       try {
-        setPreviewUserPicture(user.picture ? encodeURI(user.picture) : User);
+        setPreviewUserPicture(user.picture ? encodeURI(user.picture) : `https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
     } catch {
-        setPreviewUserPicture(User);
+        setPreviewUserPicture(`https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
     }
     })
 
