@@ -68,7 +68,7 @@ const ChatProvider = (props) => {
     onOutgoingEvent((event) => {
       if (outDone.current && event.created_at > latestOutseen.current) {
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
-        setMessageData(prev => [event, ...prev]);
+        setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestOutseen.current = event.created_at
         console.log("new outgoing");
       }
