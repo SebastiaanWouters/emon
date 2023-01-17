@@ -32,9 +32,9 @@ export const Search = () => {
   const addUser = () => {
     setCurrentUserPubkey(searchedUserData.pubkey);
     try {
-      setCurrentUserPicture(JSON.parse(searchedUserData.content).picture ? encodeURI(JSON.parse(searchedUserData.content).picture) : `https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
+      setCurrentUserPicture(JSON.parse(searchedUserData.content).picture ? encodeURI(JSON.parse(searchedUserData.content).picture) : `https://api.dicebear.com/5.x/avataaars/png?seed=${searchedUserData.pubkey.slice(0,5)}`);
     } catch {
-      setCurrentUserPicture(`https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
+      setCurrentUserPicture(`https://api.dicebear.com/5.x/avataaars/png?seed=${searchedUserData.pubkey.slice(0,5)}`);
     }
     
     setCurrentUserName(JSON.parse(searchedUserData.content).name ? JSON.parse(searchedUserData.content).name : `E${searchedUserData.pubkey}` ),
@@ -46,7 +46,7 @@ export const Search = () => {
         <div className="searchForm">
             <input type="text" onChange={(e) => {setSearchedPubkey(e.target.value)}} placeholder="enter pubkey" />
         </div>
-        {searchedUserData && <SearchPreview pk={searchedPubkey} pic={JSON.parse(searchedUserData.content).picture ? JSON.parse(searchedUserData.content).picture : User} name={JSON.parse(searchedUserData.content).name ? JSON.parse(searchedUserData.content).name : "User" } onClick={addUser}></SearchPreview>}
+        {searchedUserData && <SearchPreview pk={searchedPubkey} pic={JSON.parse(searchedUserData.content).picture ? JSON.parse(searchedUserData.content).picture : `https://api.dicebear.com/5.x/avataaars/png?seed=${searchedPubkey.slice(0,5)}`} name={JSON.parse(searchedUserData.content).name ? JSON.parse(searchedUserData.content).name : `E${searchedPubkey.slice(0,5)}` } onClick={addUser}></SearchPreview>}
     </div>
   )
 }

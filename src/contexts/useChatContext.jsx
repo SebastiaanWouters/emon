@@ -49,10 +49,6 @@ const ChatProvider = (props) => {
       },
     })
 
-    const { data : userData } = useProfile({
-      pubkey: currentUserPubkey ? currentUserPubkey : "" 
-    })
-
     
     onOutDone(() => {
       console.log('everything outgoing received');
@@ -69,7 +65,6 @@ const ChatProvider = (props) => {
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = event.created_at;
-        console.log("new outgoing");
       }
     })
 
@@ -78,7 +73,6 @@ const ChatProvider = (props) => {
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = evet.created_at;
-        console.log("new incoming");
       }
     })
 
@@ -102,8 +96,11 @@ const ChatProvider = (props) => {
             decr = cachedMessages[event.id];
             console.log("cache hit")
           } else {
-            console.log("decrypting");
-            decr = await window.nostr.nip04.decrypt(currentUserPubkey, event.content);
+            try {
+              decr = await window.nostr.nip04.decrypt(currentUserPubkey, event.content);
+            } catch {
+              decr = ""
+            }
             setCachedMessages(prev => ({...prev, [event.id] : decr}));
           }
           

@@ -8,8 +8,8 @@ import { useNostrEvents, useProfile } from "nostr-react";
 export const ChatPreview = ({chatuserpubkey, active}) => {
     const { pubkey } = useContext(userContext);
     const { setCurrentUserPubkey, setCurrentUserPicture, setCurrentUserName} = useContext(chatContext);
-    const [previewUserName, setPreviewUserName] = useState("");
-    const [previewUserPicture, setPreviewUserPicture] = useState(User);
+    const [previewUserName, setPreviewUserName] = useState(`E${chatuserpubkey.slice(0,5)}`);
+    const [previewUserPicture, setPreviewUserPicture] = useState(`https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
     const activeClass = active ? "active shadow-xl" : "shadow";
 
     const updateChatContext = () => {
@@ -20,15 +20,25 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
     }
 
 
-     const { onEvent: onNewUser } = useNostrEvents({
-      filter: {
-        kinds: [0],
-        authors: [chatuserpubkey],
-      },
+    const { data: userData } = useProfile({
+      pubkey: chatuserpubkey
     })
 
+    useEffect(() => {
+      if (userData) {
+        setPreviewUserName(userData.name ? userData.name : `E${chatuserpubkey.slice(0,5)}`);
+        try {
+          setPreviewUserPicture(userData.picture ? encodeURI(userData.picture) : `https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
+          
+        } catch {
+          console.log("malformed uri");
+          setPreviewUserPicture(`https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
+        }
+      }
+    }, [userData])
 
-    onNewUser((metaData) => {
+
+    /*onNewUser((metaData) => {
       const user = JSON.parse(metaData.content);
       setPreviewUserName(user.name ? user.name : `E${chatuserpubkey.slice(0,5)}`);
       try {
@@ -36,7 +46,7 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
     } catch {
         setPreviewUserPicture(`https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
     }
-    })
+    })*/
 
     return (
         <button onClick={updateChatContext} className={`userChat ${activeClass}`}>
