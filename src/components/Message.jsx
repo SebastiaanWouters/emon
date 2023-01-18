@@ -5,13 +5,14 @@ import { chatContext } from '../contexts/useChatContext';
 import { useContext, useState } from 'react';
 import { useProfile } from 'nostr-react';
 import { decryptMessage } from '../utils/utils';
+import { MessageContent } from './MessageContent';
 
 
-export const Message = ({owner, content, pk, id}) => {
+export const Message = ({owner, content}) => {
   const { pubkey, picture } = useContext(userContext);
   const { currentUserPubkey, currentUserName, currentUserPicture } = useContext(chatContext);
   const messageClass = owner ? "m-2 chat chat-start owner" : "m-2 chat chat-end";
-  const textClass = owner ? "chat-bubble text-base flex owner p-2.5 shadow-xl" : "chat-bubble text-base flex p-2.5 shadow-xl";
+  const textClass = owner ? "chat-bubble text-base break-all flex owner p-2.5 shadow-xl" : "chat-bubble break-all text-base flex p-2.5 shadow-xl";
   
 
   return (
@@ -21,7 +22,7 @@ export const Message = ({owner, content, pk, id}) => {
         <img src={owner ? picture : currentUserPicture} />
       </div>
     </div>
-      <div className={textClass}>{content}</div>
+      <div className={textClass}><MessageContent msg={content}></MessageContent></div>
     </div>
 
   )
