@@ -78,7 +78,7 @@ const ChatProvider = (props) => {
     })
 
     useEffect(() => {
-        if (messageData.length > 0 && messageData[0].pubkey !== currentUserPubkey && messageData[0].created_at > dateToUnix(new Date()) - 12 && !cachedMessages[messageData[0].id]) {
+        if (messageData.length > 0 && messageData[0].pubkey !== currentUserPubkey && messageData[0].created_at > dateToUnix(new Date()) - 6 && !cachedMessages[messageData[0].id]) {
           setUserNotifications(prev => ({...prev, [messageData[0].pubkey] : true}))
           console.log('incoming notification')
         }
