@@ -18,7 +18,7 @@ function App() {
       <Routes>
         {<Route path="/" element={<ChatContext><NavigationContext><Home /></NavigationContext></ChatContext>} />}
         {<Route path="/login" element={<Login />} />}
-        {<Route path="/small" element={<MobileScreen></MobileScreen>}/>}
+        {<Route path="/mobile" element={<MobileScreen></MobileScreen>}/>}
       </Routes>
     </>   
   );
