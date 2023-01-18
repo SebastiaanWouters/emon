@@ -17,7 +17,7 @@ export const Home = () => {
         <div className="container">
             <Sidebar></Sidebar>
             <Chat></Chat>
-            {pubkey == "" && <Navigate to="/" replace={true} />}
+            {pubkey === "" && <Navigate to="/login" replace={true} />}
             {width < 959 && <Navigate to="/small" replace={true} />}
         </div>
     </div>

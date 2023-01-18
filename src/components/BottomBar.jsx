@@ -52,7 +52,7 @@ export const BottomBar = () => {
             <img src={Stop} alt="" />
         </button>}
 
-      {pubkey === "" && <Navigate to="/" replace={true} />}
+      {pubkey === "" && <Navigate to="/login" replace={true} />}
     </div>
   )
 }
