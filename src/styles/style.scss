@@ -467,9 +467,19 @@ body {
                     .chat-bubble {
                         background-color: $darkerrrrrr;
                         color: $light;
+                        max-width: 90%;
                         &.owner {
                             background-color: $lighterrrrrr;
                             color: $dark;
+                        }
+                        a {
+                           margin-left: 0.1rem;
+                           margin-right: 0.1rem;
+                           color: $accent;
+                           &.lightning {
+                            color: #FF9900
+                            ;
+                           }
                         }
                     }
                         

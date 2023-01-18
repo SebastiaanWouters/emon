@@ -9,8 +9,8 @@ export const userContext = createContext(null);
 const UserProvider = (props) => {
     // this state will be shared with all components 
     const [pubkey, setPubkey] = useState(getLocalStorage("emon-pubkey", ""));
-    const [username, setUsername] = useState(`E${pubkey.slice(0,5)}`);
-    const [picture, setPicture] = useState(`https://api.dicebear.com/5.x/avataaars/png?seed=${pubkey.slice(0,5)}`)
+    const [username, setUsername] = useState(pubkey !== "" ? `E${pubkey.slice(0,5)}` : "");
+    const [picture, setPicture] = useState(pubkey !== "" ? `https://api.dicebear.com/5.x/avataaars/png?seed=${pubkey.slice(0,5)}` : User)
 
     const { onEvent: onNewUser } = useNostrEvents({
     filter: {
