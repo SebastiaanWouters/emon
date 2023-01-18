@@ -54,7 +54,8 @@ $desktop-width: 1020px;
 }
 body {
     font-family: 'Inter', sans-serif;
-    background-image: $background;
+    /*background-image: $background;*/
+    background: #9999cc;
     background-size: cover;
 }
 
@@ -86,21 +87,19 @@ body {
     }
 }
 
-@keyframes wipe-enter {
-    0% { transform: rotate(0deg); }
-   80% { transform: rotate(0deg); }
-   85% { transform: rotate(5deg); }
-   95% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
-	0% {
-		transform: scale(0, .025);
-	}
-	50% {
-		transform: scale(1, .025);
-	}
-}
-
-
+@keyframes login {
+    0% {
+      transform: rotate(0deg);
+    }
+    33% {
+        transform: rotate(-10deg);
+        
+        
+      }
+    66% {
+        transform: rotate(10deg);
+    }
+  }
 
 
 .loginContainer {
@@ -112,24 +111,20 @@ body {
     .loginButton {
         padding: $large $large;
         background-color: $darkerrrrr;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(20px);
         border-radius: $large;
         text-transform:uppercase;
         font-weight: 800;
         font-size: 2rem;
         box-shadow: 0 0 $mini rgba(10, 10 , 10, 1);
-        transition: all 0.2s ease-in-out;
+        transition: all 0.5s ease-in-out;
         color: $nord5;
 
         &:hover {
-          transform: scale(1.13);
-          font-size: 2.5rem;  
-          color: $nord0;
-          background-color: $lighterrrrrr;
-          box-shadow: 0 0 $medium $mini $lighterrrrr;
-        }
-        &:active {
-          transform: scale(1.15);
+            animation-name: login;
+            animation-duration: 0.7s;
+            color: $dark;
+            background: $lighterrrrrr;
         }
     }
 }

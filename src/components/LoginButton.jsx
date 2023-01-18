@@ -15,6 +15,6 @@ export const LoginButton = () => {
     }
 
     return (
-        <button className="loginButton" onClick={() => {fetchPubkey()}}>Let's Get Started</button>
+        <button className="loginButton" onClick={() => {fetchPubkey()}}>Start Chatting...</button>
     )
 }
