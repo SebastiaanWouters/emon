@@ -11,7 +11,7 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
     const [previewUserName, setPreviewUserName] = useState(`E${chatuserpubkey.slice(0,5)}`);
     const [previewUserPicture, setPreviewUserPicture] = useState(`https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
     const activeClass = active ? "active shadow-xl" : "shadow";
-    const [newMessage, setNewMessage] = useState(false);
+    const [newMessageClass, setNewMessageClass] = useState("");
 
     const updateChatContext = () => {
         setCurrentUserPubkey(chatuserpubkey);
@@ -41,9 +41,9 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
     useEffect(() => {
       if (userNotifications[chatuserpubkey]) {
         console.log("showing notification");
-        setNewMessage(true);
+        setNewMessageClass("active");
       } else {
-        setNewMessage(false);
+        setNewMessageClass("");
       }
     }, [userNotifications])
 
@@ -63,7 +63,7 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
             <img src={previewUserPicture} alt="" />
             <div className="userChatInfo">
                 <span className=''>{previewUserName}</span>
-                {newMessage && <div className="notification-indicator"></div> }
+                {<div className={`notification-indicator ${newMessageClass}`}></div>}
               
             </div>
         </div>

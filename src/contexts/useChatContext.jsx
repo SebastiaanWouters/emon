@@ -75,15 +75,14 @@ const ChatProvider = (props) => {
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = event.created_at;
       }
-      if (event.created_at  > dateToUnix(new Date()) - 30) {
-        setUserNotifications(prev => ({...prev, [event.pubkey] : true}))
-        console.log('notification');
-      }
     })
 
     useEffect(() => {
+        if (messageData.length > 0 && messageData[0].pubkey !== currentUserPubkey && messageData[0].created_at > dateToUnix(new Date()) - 30 && !cachedMessages[messageData[0].id]) {
+          setUserNotifications(prev => ({...prev, [messageData[0].pubkey] : true}))
+          console.log('incoming notification')
+        }
         setUserNotifications(prev => ({...prev, [currentUserPubkey] : false}));
-        console.log('removing notification')
     }, [currentUserPubkey, messageData])
 
     useEffect(() => {
