@@ -51,8 +51,6 @@ export const BottomBar = () => {
         </button> : <button onClick={toggleSearching} className="newChat">
             <img src={Stop} alt="" />
         </button>}
-
-      {pubkey === "" && <Navigate to="/" replace={true} />}
     </div>
   )
 }

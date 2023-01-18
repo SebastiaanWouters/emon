@@ -24,8 +24,8 @@ export const Login = () => {
   return (
     <div className="loginContainer">
         <LoginButton ></LoginButton>
-        {pubkey !== "" && <Navigate to="/home" replace={true} />}
-        {width < 959 && <Navigate to="/small" replace={true} />}
+        {pubkey !== "" && <Navigate to="/" replace={true} />}
+        {width < 959 && <Navigate to="/mobile" replace={true} />}
     </div>
   )
 }

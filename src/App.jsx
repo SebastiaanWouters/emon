@@ -16,9 +16,9 @@ function App() {
   return (
     <>
       <Routes>
-        {<Route path="/" element={<Login />} />}
-        {<Route path="/home" element={<ChatContext><NavigationContext><Home /></NavigationContext></ChatContext>} />}
-        {<Route path="/small" element={<MobileScreen></MobileScreen>}/>}
+        {<Route path="/" element={<ChatContext><NavigationContext><Home /></NavigationContext></ChatContext>} />}
+        {<Route path="/login" element={<Login />} />}
+        {<Route path="/mobile" element={<MobileScreen></MobileScreen>}/>}
       </Routes>
     </>   
   );
