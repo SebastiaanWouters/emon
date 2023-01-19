@@ -24,6 +24,10 @@ const ChatProvider = (props) => {
     const [currentUserDecryptedChatData, setCurrentUserDecryptedChatData] = useState("");
     const [sortedChatPartners, setSortedChatPartners] = useState([]);
     const [messageData, setMessageData] = useState([]);
+    const connectedInRelays = useRef(0);
+    const connectedOutRelays = useRef(0);
+    const finishedRelays = useRef(0);
+    const [allReceived, setAllReceived] = useState(false);
     const latestSeen = useRef(1633426447);
     let inDone = useRef(false);
     let outDone = useRef(false);
@@ -34,15 +38,7 @@ const ChatProvider = (props) => {
     const now = useRef(1568988346);
     
 
-    const { onDone : onInDone, events: incomingEvents, onEvent: onOutgoingEvent } = useNostrEvents({
-      filter: {
-        kinds: [4],
-        authors: [pubkey],
-        since: latestSeen.current
-      },
-    })
-
-    const { onDone : onOutDone, events: outgoingEvents, onEvent: onIncomingEvent } = useNostrEvents({
+    const { onConnect, onDone : onInDone, events: incomingEvents, onEvent: onIncomingEvent } = useNostrEvents({
       filter: {
         kinds: [4],
         "#p": [pubkey],
@@ -50,20 +46,42 @@ const ChatProvider = (props) => {
       },
     })
 
+    const { onDone : onOutDone, events: outgoingEvents, onEvent: onOutgoingEvent } = useNostrEvents({
+      filter: {
+        kinds: [4],
+        authors: [pubkey],
+        since: latestSeen.current
+      },
+    })
+
+    onConnect(() => {
+      //split up?
+      connectedInRelays.current += 1;
+      connectedOutRelays.current += 1;
+    })
+
     
     onOutDone(() => {
-      console.log('everything outgoing received');
-      outDone.current = true;
+      finishedRelays.current += 1;
+      if (!outDone.current && finishedRelays.current >= connectedOutRelays.current ) {
+        console.log('everything outgoing received');
+        outDone.current = true;
+      }
+      
     })
 
     onInDone(() => {
-      console.log('everything incoming received');
-      inDone.current = true;
+      finishedRelays.current += 1;
+      if (!inDone.current && finishedRelays.current >= connectedInRelays.current ) {
+        console.log('everything incoming received');
+        inDone.current = true;
+      }
     })
+
 
     onOutgoingEvent((event) => {
       if (outDone.current) {
-        setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
+        setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = event.created_at;
       }
@@ -71,7 +89,7 @@ const ChatProvider = (props) => {
 
     onIncomingEvent((event) => {
       if (outDone.current && pubkey !== event.pubkey) {
-        setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey === pubkey ? event.tags[0][1] : event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
+        setSortedChatPartners(prev => uniqBy([{"pubkey": event.tags[0][1], "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = event.created_at;
       }

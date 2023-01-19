@@ -8,8 +8,8 @@ import { useNostrEvents, useProfile } from "nostr-react";
 export const ChatPreview = ({chatuserpubkey, active}) => {
     const { pubkey } = useContext(userContext);
     const { setCurrentUserPubkey, setCurrentUserPicture, setCurrentUserName, userNotifications} = useContext(chatContext);
-    const [previewUserName, setPreviewUserName] = useState(`E${chatuserpubkey.slice(0,5)}`);
-    const [previewUserPicture, setPreviewUserPicture] = useState(`https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
+    const [previewUserName, setPreviewUserName] = useState("");
+    const [previewUserPicture, setPreviewUserPicture] = useState(User);
     const activeClass = active ? "active shadow-xl" : "shadow";
     const [newMessageClass, setNewMessageClass] = useState("");
 
@@ -35,6 +35,9 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
           console.log("malformed uri");
           setPreviewUserPicture(`https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
         }
+      } else {
+        setPreviewUserName(`E${chatuserpubkey.slice(0,5)}`);
+        setPreviewUserPicture(`https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
       }
     }, [userData])
 
@@ -47,16 +50,6 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
       }
     }, [userNotifications])
 
-
-    /*onNewUser((metaData) => {
-      const user = JSON.parse(metaData.content);
-      setPreviewUserName(user.name ? user.name : `E${chatuserpubkey.slice(0,5)}`);
-      try {
-        setPreviewUserPicture(user.picture ? encodeURI(user.picture) : `https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
-    } catch {
-        setPreviewUserPicture(`https://avatars.dicebear.com/v2/avataaars/${chatuserpubkey.slice(0,5)}.svg`);
-    }
-    })*/
 
     return (
         <div onClick={updateChatContext} className={`userChat ${activeClass}`}>
