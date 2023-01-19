@@ -468,6 +468,7 @@ body {
                         background-color: $darkerrrrrr;
                         color: $light;
                         max-width: 90%;
+                        overflow-x: hidden;
                         &.owner {
                             background-color: $lighterrrrrr;
                             color: $dark;
