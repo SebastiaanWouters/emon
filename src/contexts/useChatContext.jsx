@@ -88,20 +88,13 @@ const ChatProvider = (props) => {
     })
 
     onIncomingEvent((event) => {
-      if (outDone.current && pubkey !== event.pubkey) {
+      if (inDone.current && pubkey !== event.pubkey) {
+        setUserNotifications(prev => ({...prev, [event.pubkey] : true}))
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.tags[0][1], "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = event.created_at;
       }
     })
-
-    useEffect(() => {
-        if (messageData.length > 0 && messageData[0].pubkey !== currentUserPubkey && messageData[0].created_at > dateToUnix(new Date()) - 6 && !cachedMessages[messageData[0].id]) {
-          setUserNotifications(prev => ({...prev, [messageData[0].pubkey] : true}))
-          console.log('incoming notification')
-        }
-        setUserNotifications(prev => ({...prev, [currentUserPubkey] : false}));
-    }, [currentUserPubkey, messageData])
 
     useEffect(() => {
       if (inDone.current && outDone.current) {
@@ -116,6 +109,7 @@ const ChatProvider = (props) => {
 
     useEffect(() => {
       async function decryptMessageData() {
+        setUserNotifications(prev => ({...prev, [currentUserPubkey] : false}));
         let decrypted = [];
         for (const event of messageData.filter(event => ((currentUserPubkey !== pubkey && (event.pubkey === currentUserPubkey || event.tags[0][1] === currentUserPubkey)) || (currentUserPubkey === pubkey && event.tags[0][1] === currentUserPubkey && event.pubkey === currentUserPubkey)))) {
           let decr = "";
