@@ -48,7 +48,7 @@ export const Search = () => {
   const addUser = () => {
     setCurrentUserPubkey(pubkeyToSearch);
     try {
-      setCurrentUserPicture(userData.picture ? encodeURI(userData.picture) : `https://api.dicebear.com/5.x/avataaars/png?seed=${userData.pubkey.slice(0,5)}`);
+      setCurrentUserPicture(userData.picture ? encodeURI(`https://imgproxy-prod-emon-image-proxy-8tbihf.mo2.mogenius.io/imgproxy-og28dq/plain/${userData.picture}`) : `https://api.dicebear.com/5.x/avataaars/png?seed=${userData.pubkey.slice(0,5)}`);
     } catch {
       setCurrentUserPicture(`https://api.dicebear.com/5.x/avataaars/png?seed=${userData.pubkey.slice(0,5)}`);
     }
@@ -62,7 +62,7 @@ export const Search = () => {
         <div className="searchForm">
             <input type="text" onChange={(e) => {setEnteredPubkey(e.target.value)}} placeholder="enter pubkey" />
         </div>
-        {userData && <SearchPreview pk={pubkeyToSearch} pic={userData.picture ? userData.picture : `https://api.dicebear.com/5.x/avataaars/png?seed=${pubkeyToSearch.slice(0,5)}`} name={userData.name ? userData.name : `E${pubkeyToSearch.slice(0,5)}` } onClick={addUser}></SearchPreview>}
+        {userData && <SearchPreview pk={pubkeyToSearch} pic={userData.picture ? encodeURI(`https://imgproxy-prod-emon-image-proxy-8tbihf.mo2.mogenius.io/imgproxy-og28dq/plain/${userData.picture}`) : `https://api.dicebear.com/5.x/avataaars/png?seed=${pubkeyToSearch.slice(0,5)}`} name={userData.name ? userData.name : `E${pubkeyToSearch.slice(0,5)}` } onClick={addUser}></SearchPreview>}
     </div>
   )
 }

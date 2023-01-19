@@ -29,7 +29,7 @@ export const ChatPreview = ({chatuserpubkey, active}) => {
       if (userData) {
         setPreviewUserName(userData.name ? userData.name : `E${chatuserpubkey.slice(0,5)}`);
         try {
-          setPreviewUserPicture(userData.picture ? encodeURI(userData.picture) : `https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
+          setPreviewUserPicture(userData.picture ? encodeURI(`https://imgproxy-prod-emon-image-proxy-8tbihf.mo2.mogenius.io/imgproxy-og28dq/plain/${userData.picture}`) : `https://api.dicebear.com/5.x/avataaars/png?seed=${chatuserpubkey.slice(0,5)}`);
           
         } catch {
           console.log("malformed uri");
