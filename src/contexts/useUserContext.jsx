@@ -12,23 +12,23 @@ const UserProvider = (props) => {
     const [username, setUsername] = useState(pubkey !== "" ? `E${pubkey.slice(0,5)}` : "");
     const [picture, setPicture] = useState(pubkey !== "" ? `https://api.dicebear.com/5.x/avataaars/png?seed=${pubkey.slice(0,5)}` : User)
 
-    const { onEvent: onNewUser } = useNostrEvents({
-    filter: {
-        kinds: [0],
-        authors: [pubkey],
-    },
+    
+    const { data: userData } = useProfile({
+        pubkey: pubkey
     })
 
-    onNewUser((metaData) => {
-        const user = JSON.parse(metaData.content);
-        setUsername(user.name ? user.name : `E${pubkey.slice(0,5)}`);
-        try {
-            setPicture(user.picture ? encodeURI(user.picture) : `https://api.dicebear.com/5.x/avataaars/png?seed=${pubkey.slice(0,5)}`);
-        } catch {
+    useEffect(() => {
+        if (userData) {
+          setUsername(userData.name ? userData.name : `E${pubkey.slice(0,5)}`);
+          try {
+            setPicture(userData.picture ? encodeURI(`https://imgproxy-prod-emon-image-proxy-8tbihf.mo2.mogenius.io/imgproxy-og28dq/plain/${userData.picture}`) : `https://api.dicebear.com/5.x/avataaars/png?seed=${pubkey.slice(0,5)}`);
+            
+          } catch {
+            console.log("malformed uri");
             setPicture(`https://api.dicebear.com/5.x/avataaars/png?seed=${pubkey.slice(0,5)}`);
+          }
         }
-        
-    })
+      }, [userData])
 
     return (
         // this is the provider providing state
