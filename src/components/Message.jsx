@@ -12,7 +12,7 @@ export const Message = ({owner, content}) => {
   const { pubkey, picture } = useContext(userContext);
   const { currentUserPubkey, currentUserName, currentUserPicture } = useContext(chatContext);
   const messageClass = owner ? "m-2 chat chat-start owner" : "m-2 chat chat-end";
-  const textClass = owner ? "chat-bubble text-base break-all owner p-2.5 shadow-xl" : "chat-bubble break-all text-base p-2.5 shadow-xl";
+  const textClass = owner ? "chat-bubble text-base break-word owner p-2.5 shadow-xl" : "chat-bubble break-word text-base p-2.5 shadow-xl";
   
 
   return (
