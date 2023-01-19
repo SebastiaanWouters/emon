@@ -10,7 +10,7 @@ export const MessageContent = ({msg}) => {
     function replaceLinks(msg) {
         return (reactStringReplace(msg, linkRegex, (match, i) => (
             <a key={match + i} href={match} target="_blank">
-              {match}
+              {match.length > 20 ? `${match.slice(0,20)}...` : match}
             </a>
           )))
     }
@@ -19,7 +19,9 @@ export const MessageContent = ({msg}) => {
             if (!match.startsWith('lightning:')) {
               match = `lightning:${match}`;
             }
-            return <a className='lightning' key={match + i} href={match}>⚡ Pay with lightning</a>;
+            return (<>
+                    <a className='lightning' key={match + i} href={match}>⚡ Pay with lightning</a>
+                    </>)
           });
     }
     function replaceAll(msg) {

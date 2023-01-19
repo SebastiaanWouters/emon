@@ -473,12 +473,12 @@ body {
                             color: $dark;
                         }
                         a {
-                           margin-left: 0.1rem;
-                           margin-right: 0.1rem;
+                           margin-left: 0.12rem;
+                           margin-right: 0.12rem;
                            color: $accent;
+                           word-wrap: break-word;
                            &.lightning {
-                            color: #FF9900
-                            ;
+                            color: #FF9900;
                            }
                         }
                     }
