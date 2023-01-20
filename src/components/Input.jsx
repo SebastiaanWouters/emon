@@ -29,7 +29,7 @@ export const Input = () => {
 
   const sendMessage = async () => {
     if (chatMessage !== "") {
-      publishEvent(chatMessage);
+      publishEvent(chatMessage, setMessage(''));
     }
       
   }
