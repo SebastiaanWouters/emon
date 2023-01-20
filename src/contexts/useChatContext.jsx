@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext, useRef } from 'react';
+import { createContext, useState, useEffect, useContext, useRef, useLayoutEffect } from 'react';
 import { uniqBy } from '../utils/util';
 import { useProfile, dateToUnix, useNostrEvents, useNostr } from 'nostr-react';
 import { userContext } from './useUserContext';
@@ -32,6 +32,12 @@ const ChatProvider = (props) => {
 
     const { pubkey } = useContext(userContext);
     const { publish } = useNostr();
+
+    useLayoutEffect(() => {
+      document.addEventListener("visibilitychange", onVisibilityChange);
+    
+      return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+    }, [currentUserPubkey]);
 
     const { onConnect: onInConnect, onDone : onInDone, events: incomingEvents, onEvent: onIncomingEvent } = useNostrEvents({
       filter: {
@@ -95,6 +101,9 @@ const ChatProvider = (props) => {
         setMessageData(prev => uniqBy([event, ...prev], "id"));
         latestSeen.current = event.created_at;
       }
+      if (inDone.current && document.hidden && event.created_at > dateToUnix(new Date()) - 6) {
+        document.title = "⦿ emon"
+      }
     })
 
     useEffect(() => {
@@ -112,7 +121,7 @@ const ChatProvider = (props) => {
       async function decryptMessageData() {
         setUserNotifications(prev => ({...prev, [currentUserPubkey] : false}));
         for (var key of Object.keys(userNotifications)) {
-          if (userNotifications[key] === true && key !== currentUserPubkey) {
+          if ((userNotifications[key] === true && key !== currentUserPubkey) || (document.hidden)) {
             console.log(key);
             break;
           }
@@ -147,6 +156,18 @@ const ChatProvider = (props) => {
       }
       
     }, [messageData, currentUserPubkey])
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        for (var key of Object.keys(userNotifications)) {
+          if ((userNotifications[key] === true && key !== currentUserPubkey)) {
+            console.log(key);
+            break;
+          }
+          document.title = "emon"
+        }
+      }
+    };
 
     const publishEvent = async (message, resetMessage = () => {}) => {
       let enc = await window.nostr.nip04.encrypt(currentUserPubkey, message);
