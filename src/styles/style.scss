@@ -137,12 +137,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    .blurred {
-        filter: blur(2px);
-        -webkit-filter: blur(2px);
-        pointer-events: none;
-      }
       
     .container {
         background-color: transparent;
@@ -508,7 +502,7 @@ body {
                 flex-direction: column;
                 position: absolute;
                 top: 9%;
-                left: 64%;
+                right: 1%;
                 background: $darkerrrrrrr;
                 backdrop-filter: blur(18.5px);
                 -webkit-backdrop-filter: blur(55px);

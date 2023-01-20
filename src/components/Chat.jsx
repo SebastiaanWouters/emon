@@ -15,6 +15,7 @@ export const Chat = () => {
   const [invoiceActive, setInvoiceActive] = useState(false)
 
   function showInvoice() {
+
     setInvoiceActive(true);
   }
   function hideInvoice() {

@@ -36,7 +36,6 @@ export const MessageContent = ({msg, owner}) => {
           })}
           if (owner) { return reactStringReplace(msg, lnRegex, (match, i) => {
             const invoice = decode(match);
-            console.log(invoice);
             return (<>
                     <span className='lightning' key={match + i} >{invoice.sections[2].value/1000} Sats Requested ⚡</span>
                     </>)
