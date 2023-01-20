@@ -8,20 +8,28 @@ import { chatContext } from '../contexts/useChatContext';
 import { userContext } from '../contexts/useUserContext';
 import { useContext, useState } from 'react';
 import { useNostrEvents, useProfile } from 'nostr-react'
+import { InvoiceCreator } from './InvoiceCreator'
 
 export const Chat = () => {
   const { currentUserPubkey, currentUserName, currentUserPicture } = useContext(chatContext);
+  const [invoiceActive, setInvoiceActive] = useState(false)
+
+  function showInvoice() {
+    setInvoiceActive(true);
+  }
+  function hideInvoice() {
+    setInvoiceActive(false);
+  }
   
   return (
     <div className='chatComp'>
       <div className="chatInfo">
-        <span>{currentUserName}</span>
+        {currentUserPubkey !== '' && <><span>{currentUserName}</span>
         <div className="chatIcons">
-          <img src={Cam} alt="" />
-          <img src={Add} alt="" />
-          <img src={More} alt="" />
-        </div>
+            <button onClick={showInvoice} className="lnbtn">⚡</button>
+        </div></>}
       </div>
+      {invoiceActive && <InvoiceCreator hide={hideInvoice}></InvoiceCreator>}
       {currentUserPubkey !== "" && <Messages></Messages>}
       {currentUserPubkey !== "" && <Input></Input>}
     </div>

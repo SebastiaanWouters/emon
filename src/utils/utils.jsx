@@ -6,7 +6,7 @@ import {
   getPublicKey,
   signEvent,
   validateEvent,
-  verifySignature
+  verifySignature,
 } from "nostr-tools";
 
 
@@ -174,5 +174,4 @@ export function useWindowDimensions() {
 
   return windowDimensions;
 }
-
 

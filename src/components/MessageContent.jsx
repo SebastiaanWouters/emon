@@ -1,7 +1,8 @@
 import React from 'react'
 import reactStringReplace from 'react-string-replace'
+import {decode} from 'light-bolt11-decoder'
 
-export const MessageContent = ({msg}) => {
+export const MessageContent = ({msg, owner}) => {
     const IMAGE_PROXY = "https://imgproxy-prod-emon-image-proxy-8tbihf.mo2.mogenius.io/imgproxy-og28dq/plain/";
     const linkRegex = /(https?:\/\/\S+)/g
     const lnRegex =
@@ -25,14 +26,21 @@ export const MessageContent = ({msg}) => {
           )))
     }
     function replaceInvoice(msg) {
-        return reactStringReplace(msg, lnRegex, (match, i) => {
+        if (!owner) {return reactStringReplace(msg, lnRegex, (match, i) => {
             if (!match.startsWith('lightning:')) {
               match = `lightning:${match}`;
             }
             return (<>
                     <a className='lightning' key={match + i} href={match}>⚡ Pay with lightning</a>
                     </>)
-          });
+          })}
+          if (owner) { return reactStringReplace(msg, lnRegex, (match, i) => {
+            const invoice = decode(match);
+            console.log(invoice);
+            return (<>
+                    <span className='lightning' key={match + i} >{invoice.sections[2].value/1000} Sats Requested ⚡</span>
+                    </>)
+          })}
     }
 
 

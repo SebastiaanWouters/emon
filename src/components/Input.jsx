@@ -11,7 +11,7 @@ export const Input = () => {
 
   const { publish } = useNostr();
   const { pubkey } = useContext(userContext);
-  const { currentUserPubkey } = useContext(chatContext);
+  const { currentUserPubkey, invoiceData, setInvoiceData } = useContext(chatContext);
   const [chatMessage, setMessage] = useState("");
 
   const updateMessage = (e) => {
@@ -22,6 +22,13 @@ export const Input = () => {
     setMessage("");
   }, [currentUserPubkey])
 
+  useEffect(() => {
+    if (invoiceData && invoiceData.paymentRequest) {
+      publishEvent(invoiceData.paymentRequest);
+      setInvoiceData(null);
+    } 
+  }, [invoiceData])
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       sendMessage();
@@ -30,13 +37,13 @@ export const Input = () => {
 
   const sendMessage = async () => {
     if (chatMessage !== "") {
-      publishEvent();
+      publishEvent(chatMessage);
     }
       
   }
 
-  const publishEvent = async () => {
-    let enc = await window.nostr.nip04.encrypt(currentUserPubkey, chatMessage);
+  const publishEvent = async (message) => {
+    let enc = await window.nostr.nip04.encrypt(currentUserPubkey, message);
     
     const event = {
       "content": enc,

@@ -34,9 +34,9 @@ const ChatProvider = (props) => {
     let outDone = useRef(false);
     let [userNotifications, setUserNotifications] = useState({})
     const [cachedMessages, setCachedMessages] = useState([]);
+    const [invoiceData, setInvoiceData] = useState(null);
 
     const { pubkey } = useContext(userContext);
-    const now = useRef(1568988346);
     
 
     const { onConnect: onInConnect, onDone : onInDone, events: incomingEvents, onEvent: onIncomingEvent } = useNostrEvents({
@@ -148,7 +148,7 @@ const ChatProvider = (props) => {
    
     return (
         // this is the provider providing state
-        <chatContext.Provider value={{currentUserPubkey, setCurrentUserPubkey, currentUserName, currentUserPicture, setCurrentUserPicture, setCurrentUserName, currentUserDecryptedChatData, sortedChatPartners, userNotifications}}>
+        <chatContext.Provider value={{currentUserPubkey, setCurrentUserPubkey, currentUserName, currentUserPicture, setCurrentUserPicture, setCurrentUserName, currentUserDecryptedChatData, sortedChatPartners, userNotifications, invoiceData, setInvoiceData}}>
             {props.children}
         </chatContext.Provider>
     );

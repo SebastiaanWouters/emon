@@ -22,7 +22,7 @@ export const Message = ({owner, content}) => {
         <img src={owner ? picture : currentUserPicture} />
       </div>
     </div>
-      <div className={textClass}><MessageContent msg={content}></MessageContent></div>
+      <div className={textClass}><MessageContent msg={content} owner={owner}></MessageContent></div>
     </div>
 
   )
