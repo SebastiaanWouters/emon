@@ -161,7 +161,6 @@ const ChatProvider = (props) => {
       if (document.visibilityState === 'visible') {
         for (var key of Object.keys(userNotifications)) {
           if ((userNotifications[key] === true && key !== currentUserPubkey)) {
-            console.log(key);
             break;
           }
           document.title = "emon"

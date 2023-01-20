@@ -4,7 +4,7 @@ import App from './App';
 import { useContext } from 'react';
 import UserContext from "./contexts/useUserContext";
 import { NostrProvider } from "nostr-react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 const relayUrls = [
   "wss://nostr-pub.wellorder.net", "wss://relay.damus.io", "wss://relay.nostr.info", "wss://relay.snort.social"
