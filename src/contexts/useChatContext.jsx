@@ -89,6 +89,7 @@ const ChatProvider = (props) => {
       if (inDone.current && pubkey !== event.pubkey) {
         if (event.created_at > dateToUnix(new Date()) - 6) {
           setUserNotifications(prev => ({...prev, [event.pubkey] : true}))
+          document.title = "⦿ emon"
         }
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
@@ -110,6 +111,13 @@ const ChatProvider = (props) => {
     useEffect(() => {
       async function decryptMessageData() {
         setUserNotifications(prev => ({...prev, [currentUserPubkey] : false}));
+        for (var key of Object.keys(userNotifications)) {
+          if (userNotifications[key] === true && key !== currentUserPubkey) {
+            console.log(key);
+            break;
+          }
+          document.title = "emon"
+        }
         let decrypted = [];
         for (const event of messageData.filter(event => ((currentUserPubkey !== pubkey && (event.pubkey === currentUserPubkey || event.tags[0][1] === currentUserPubkey)) || (currentUserPubkey === pubkey && event.tags[0][1] === currentUserPubkey && event.pubkey === currentUserPubkey)))) {
           let decr = "";
