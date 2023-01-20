@@ -470,11 +470,15 @@ body {
                         display: flex;
                         align-items: flex-end;
                     }
+                    &.chat-end {
+                        word-break:break-word;
+                    }
                     .chat-bubble {
                         background-color: $darkerrrrrr;
                         color: $light;
                         max-width: 90%;
                         overflow-x: hidden;
+                        min-width: 1.7rem;
                         &.owner {
                             background-color: $lighterrrrrr;
                             color: $dark;
