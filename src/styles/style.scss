@@ -492,6 +492,9 @@ body {
                             max-width: 20rem;
 
                         }
+                        a {
+                            color: $accent;
+                        }
                     }
                         
                 }
@@ -532,10 +535,10 @@ body {
                         border-radius: $border-radius;
                         transition: all 0.1s ease-in-out;
                         &.submit {
-                            background: green;
+                            background: #00A550;
                         }
                         &.cancel {
-                            background: red;
+                            background: #E23D28;
                         }
                         &:hover {
                             background: $lighterrrrrr;
