@@ -501,16 +501,16 @@ body {
                 display: flex;
                 flex-direction: column;
                 position: absolute;
-                top: 9%;
-                right: 1%;
+                top: 4rem;
+                right: $mini;
                 background: $darkerrrrrrr;
-                backdrop-filter: blur(18.5px);
-                -webkit-backdrop-filter: blur(55px);
+                color: $light;
                 padding: $medium $medium;
                 border-radius: $small;
                 z-index: 10;
                 
                 input {
+                    background: $dark;
                     outline: none;
                     padding: $mini $mini;
                     border-radius: $mini;
