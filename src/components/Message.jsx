@@ -11,7 +11,7 @@ import { MessageContent } from './MessageContent';
 export const Message = ({owner, content}) => {
   const { pubkey, picture } = useContext(userContext);
   const { currentUserPubkey, currentUserName, currentUserPicture } = useContext(chatContext);
-  const messageClass = owner ? "m-2 chat chat-start owner" : "m-2 chat chat-end";
+  const messageClass = owner ? "m-2 chat chat-end" : "m-2 chat chat-start owner";
   const textClass = owner ? "chat-bubble text-base break-word owner p-2.5 shadow-xl" : "chat-bubble break-word text-base p-2.5 shadow-xl";
   
 
@@ -22,7 +22,7 @@ export const Message = ({owner, content}) => {
         <img src={owner ? picture : currentUserPicture} />
       </div>
     </div>
-      <div className={textClass}><MessageContent msg={content}></MessageContent></div>
+      <div className={textClass}><MessageContent msg={content} owner={owner}></MessageContent></div>
     </div>
 
   )

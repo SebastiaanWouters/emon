@@ -27,6 +27,7 @@ $darkerrrr: rgba(0,0,0,0.3);
 $darkerrrrr: rgba(0,0,0,0.4);
 $darkerrrrrr: rgba(0,0,0,0.5);
 $darkerrrrrrr: rgba(0,0,0,0.6);
+$darkerrrrrrrr: rgba(0,0,0,0.9);
 $lighter: rgba(255, 255, 255, 0.1);
 $lighterr: rgba(255, 255, 255, 0.2);
 $lighterrr: rgba(255, 255, 255, 0.3);
@@ -137,7 +138,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
+      
     .container {
         background-color: transparent;
         border-radius: $border-radius;
@@ -426,6 +427,7 @@ body {
             background: $darkerrrrrr;
             backdrop-filter: blur(16.5px);
             -webkit-backdrop-filter: blur(50px);
+            position: relative;
 
             .chatInfo {
                 flex: 1;
@@ -433,7 +435,7 @@ body {
                 background-color: $darkerrrrr;
                 align-items: center;
                 justify-content: space-between;
-                padding: $mini $small;
+                padding: $small $small;
                 color: $light;
                 max-height: 60px;
                 min-height: 60px;
@@ -446,6 +448,10 @@ body {
                     img {
                         height: $medium;
                         cursor: pointer;
+                    }
+                    .lnbtn {
+                        margin-right: $mini;
+                        font-size: larger;
                     }
                 }
             }
@@ -473,7 +479,7 @@ body {
                             background-color: $lighterrrrrr;
                             color: $dark;
                         }
-                        a {
+                        button {
                            margin-left: 0.12rem;
                            margin-right: 0.12rem;
                            color: $accent;
@@ -490,6 +496,55 @@ body {
                         
                 }
                 
+            }
+
+            .invoiceCard {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 4rem;
+                right: $mini;
+                background: $darkerrrrrrrr;
+                color: $light;
+                padding: $medium $medium;
+                border-radius: $small;
+                z-index: 10;
+                box-shadow: $box-shadow;
+                input {
+                    background: $lighterrrrr;
+                    outline: none;
+                    padding: $mini $mini;
+                    border-radius: $mini;
+                    color: $dark;
+                }
+                .label {
+
+                }
+                .buttons {
+                    display:flex;
+                    gap: $larger;
+                    justify-content: center;
+                    margin-top: $medium;
+                    button {
+                        background-color: $darkerrrrrr;
+                        padding: $mini $small;
+                        color: $light;
+                        border-radius: $border-radius;
+                        transition: all 0.1s ease-in-out;
+                        &.submit {
+                            background: green;
+                        }
+                        &.cancel {
+                            background: red;
+                        }
+                        &:hover {
+                            background: $lighterrrrrr;
+                            transform: scale(1.01);
+                            color: $dark
+                        }
+                    }
+                    
+                }
             }
 
             .inputComp {

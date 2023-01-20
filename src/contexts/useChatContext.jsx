@@ -1,17 +1,12 @@
 import { createContext, useState, useEffect, useContext, useRef } from 'react';
 import { uniqBy } from '../utils/util';
-import { useProfile, dateToUnix, useNostrEvents } from 'nostr-react';
+import { useProfile, dateToUnix, useNostrEvents, useNostr } from 'nostr-react';
 import { userContext } from './useUserContext';
 import User from '../img/user.png'
 import { Message } from '../components/Message';
 import { getLocalStorage, setLocalStorage } from '../utils/utils';
 import {
   getEventHash,
-  relayInit,
-  getPublicKey,
-  signEvent,
-  validateEvent,
-  verifySignature
 } from "nostr-tools";
 
 export const chatContext = createContext(null);
@@ -36,8 +31,7 @@ const ChatProvider = (props) => {
     const [cachedMessages, setCachedMessages] = useState([]);
 
     const { pubkey } = useContext(userContext);
-    const now = useRef(1568988346);
-    
+    const { publish } = useNostr();
 
     const { onConnect: onInConnect, onDone : onInDone, events: incomingEvents, onEvent: onIncomingEvent } = useNostrEvents({
       filter: {
@@ -145,10 +139,29 @@ const ChatProvider = (props) => {
       }
       
     }, [messageData, currentUserPubkey])
+
+    const publishEvent = async (message, resetMessage = () => {}) => {
+      let enc = await window.nostr.nip04.encrypt(currentUserPubkey, message);
+      
+      const event = {
+        "content": enc,
+        "kind": 4,
+        "tags": [['p', currentUserPubkey]],
+        "created_at": dateToUnix(),
+        "pubkey": pubkey,
+      };
+      
+      console.log(event);
+      event.id = getEventHash(event);
+      const signedEvent = await window.nostr.signEvent(event);
+      
+      publish(signedEvent);
+      resetMessage();
+  };
    
     return (
         // this is the provider providing state
-        <chatContext.Provider value={{currentUserPubkey, setCurrentUserPubkey, currentUserName, currentUserPicture, setCurrentUserPicture, setCurrentUserName, currentUserDecryptedChatData, sortedChatPartners, userNotifications}}>
+        <chatContext.Provider value={{currentUserPubkey, setCurrentUserPubkey, currentUserName, currentUserPicture, setCurrentUserPicture, setCurrentUserName, currentUserDecryptedChatData, sortedChatPartners, userNotifications, publishEvent}}>
             {props.children}
         </chatContext.Provider>
     );

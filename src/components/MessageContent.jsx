@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import reactStringReplace from 'react-string-replace'
+import {decode} from 'light-bolt11-decoder'
+import { requestProvider } from 'webln';
+import { chatContext } from '../contexts/useChatContext';
 
-export const MessageContent = ({msg}) => {
+export const MessageContent = ({msg, owner}) => {
+    const { publishEvent } = useContext(chatContext);
     const IMAGE_PROXY = "https://imgproxy-prod-emon-image-proxy-8tbihf.mo2.mogenius.io/imgproxy-og28dq/plain/";
     const linkRegex = /(https?:\/\/\S+)/g
     const lnRegex =
@@ -24,15 +28,38 @@ export const MessageContent = ({msg}) => {
             </a>
           )))
     }
+
+    async function makePayment(paymentRequest) {
+      try {
+        const webln = await requestProvider();
+        const paymentResult = await webln.sendPayment(paymentRequest);
+        console.log(paymentResult);
+        const invoice = decode(paymentRequest);
+        if (paymentResult) {
+            console.log("publishing paid event")
+            publishEvent(`⚡ Paid ${invoice.sections[2].value/1000} Sats`);
+            hide();
+        }
+      } catch {
+
+      }
+    }
+    
     function replaceInvoice(msg) {
-        return reactStringReplace(msg, lnRegex, (match, i) => {
+        if (!owner) {return reactStringReplace(msg, lnRegex, (match, i) => {
             if (!match.startsWith('lightning:')) {
-              match = `lightning:${match}`;
+              /*match = `lightning:${match}`;*/
             }
             return (<>
-                    <a className='lightning' key={match + i} href={match}>⚡ Pay with lightning</a>
+                    <button className='lightning' key={match + i} onClick={() => {makePayment(match)}} >⚡ Pay with lightning</button>
                     </>)
-          });
+          })}
+          if (owner) { return reactStringReplace(msg, lnRegex, (match, i) => {
+            const invoice = decode(match);
+            return (<>
+                    <span className='lightning' key={match + i} >{invoice.sections[2].value/1000} Sats Requested ⚡</span>
+                    </>)
+          })}
     }
 
 
