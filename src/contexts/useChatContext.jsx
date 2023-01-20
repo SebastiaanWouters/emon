@@ -95,7 +95,6 @@ const ChatProvider = (props) => {
       if (inDone.current && pubkey !== event.pubkey) {
         if (event.created_at > dateToUnix(new Date()) - 6) {
           setUserNotifications(prev => ({...prev, [event.pubkey] : true}))
-          document.title = "⦿ emon"
         }
         setSortedChatPartners(prev => uniqBy([{"pubkey": event.pubkey, "timestamp": event.created_at}, ...prev], "pubkey"));
         setMessageData(prev => uniqBy([event, ...prev], "id"));
@@ -159,12 +158,7 @@ const ChatProvider = (props) => {
 
     const onVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        for (var key of Object.keys(userNotifications)) {
-          if ((userNotifications[key] === true && key !== currentUserPubkey)) {
-            break;
-          }
           document.title = "emon"
-        }
       }
     };
 
