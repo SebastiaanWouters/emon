@@ -3,9 +3,10 @@ import { requestProvider } from 'webln';
 import { chatContext } from '../contexts/useChatContext';
 import { userContext } from '../contexts/useUserContext';
 
+
 export const InvoiceCreator = ({hide}) => {
 
-    const { invoiceData, setInvoiceData, currentUserPubkey } = useContext(chatContext);
+    const { currentUserPubkey, publishEvent } = useContext(chatContext);
     const { pubkey } = useContext(userContext);
     const [amount, setAmount] = useState("");
     const [desc, setDesc] = useState("");
@@ -20,7 +21,7 @@ export const InvoiceCreator = ({hide}) => {
               });
             console.log(invoice.paymentRequest);
             if (invoice.paymentRequest) {
-                setInvoiceData(invoice);
+                publishEvent(invoice.paymentRequest);
                 hide();
             }
           } catch {
@@ -35,8 +36,8 @@ export const InvoiceCreator = ({hide}) => {
             <div className='label'><p>Description:</p></div>
             <input type="text" value={desc} onChange={(e) => {setDesc(e.target.value)}}className="descriptionInput" />
             <div className="buttons">
-            <button onClick={hide}>Cancel</button>
-            <button onClick={createInvoice}>Request</button>    
+            <button className="cancel" onClick={hide}>Cancel</button>
+            <button className="submit" onClick={createInvoice}>Request</button>    
             </div>        
         </div>
     )
