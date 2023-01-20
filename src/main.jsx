@@ -13,7 +13,7 @@ const relayUrls = [
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <NostrProvider relayUrls={relayUrls} debug={true}>
+    <NostrProvider relayUrls={relayUrls} debug={false}>
      <UserContext>
         <Router>
         <App />
