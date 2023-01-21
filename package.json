@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hasanm95/cogo-toast": "github:hasanm95/cogo-toast",
+    "@hasanm95/cogo-toast": "https://github.com/hasanm95/cogo-toast.git",
     "@headlessui/react": "^1.7.7",
     "daisyui": "^2.46.1",
     "light-bolt11-decoder": "^2.1.0",

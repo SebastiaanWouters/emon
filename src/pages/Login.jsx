@@ -26,7 +26,7 @@ export const Login = () => {
   return (
     <div className="loginContainer">
         <div className='column'>
-        <img src={Bubble} width={512} className="speech-bubble"></img>
+        <img src={Bubble} width={600} className="speech-bubble"></img>
         
         {<LoginButton ></LoginButton>}
         {pubkey !== "" && <Navigate to="/" replace={true} />}
