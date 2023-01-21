@@ -1001,9 +1001,10 @@ normalize-range@^0.1.2:
   resolved "https://registry.npmjs.org/normalize-range/-/normalize-range-0.1.2.tgz"
   integrity sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==
 
-"nostr-react@https://github.com/SebastiaanWouters/nostr-react.git":
+nostr-react@^0.6.1:
   version "0.6.1"
-  resolved "git+ssh://git@github.com/SebastiaanWouters/nostr-react.git#b322854f75bca96c78ad6b41132974e05554cf04"
+  resolved "https://registry.yarnpkg.com/nostr-react/-/nostr-react-0.6.1.tgz#97e5702cf688f1eebece1f93efc67465dfae9ce5"
+  integrity sha512-9VWzscj5974EO+q7qxU4Cdk3l4LbadvovOHhfmT0AfRZW/T77iaqj4M4T+OeGbFSLECveNj9SQC36dc14x7gXA==
   dependencies:
     jotai "^1.12.1"
     nostr-tools "^1.1.0"
