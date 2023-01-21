@@ -128,6 +128,7 @@ const ChatProvider = (props) => {
         }
         let decrypted = [];
         for (const event of messageData.filter(event => ((currentUserPubkey !== pubkey && (event.pubkey === currentUserPubkey || event.tags[0][1] === currentUserPubkey)) || (currentUserPubkey === pubkey && event.tags[0][1] === currentUserPubkey && event.pubkey === currentUserPubkey)))) {
+          console.log("working")
           let decr = "";
           if (cachedMessages[event.id] || cachedMessages[event.id] === "") {
             decr = cachedMessages[event.id];

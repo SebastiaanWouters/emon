@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Bubble from '../img/speech-bubble.gif'
+import Bubble from '../img/speech-bubble.png'
 import { LoginButton } from '../components/LoginButton';
 import { Navigate } from "react-router-dom";
 import { userContext } from '../contexts/useUserContext';
