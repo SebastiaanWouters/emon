@@ -9,14 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hasanm95/cogo-toast": "https://github.com/hasanm95/cogo-toast.git",
     "@headlessui/react": "^1.7.7",
     "daisyui": "^2.46.1",
     "light-bolt11-decoder": "^2.1.0",
     "nord": "^0.2.1",
-    "nostr-react": "^0.6.1",
+    "nostr-react": "https://github.com/SebastiaanWouters/nostr-react.git",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.0",
     "react-router-dom": "6",
     "react-string-replace": "^1.1.0",
     "sass": "^1.57.1",
