@@ -56,9 +56,6 @@ $desktop-width: 1020px;
 }
 body {
     font-family: 'Inter', sans-serif;
-    
-    /*background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
-    background-size: cover;*/
     background: $dark;
 }
 
@@ -176,12 +173,12 @@ body {
         .speech-bubble {
             position: absolute;
             filter: drop-shadow(3px 5px 3px rgb(30 30 30 / 0.4));
-            top: 0.7rem;
-            left: 7.2rem;
+            top: -1.3rem;
+            left: 7.5rem;
         }
         .logo {
             filter: drop-shadow(3px 5px 3px rgb(40 40 40 / 0.4));
-            transition: all 0.2s cubic-bezier();
+            transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
             &:hover {
                 filter: drop-shadow(3px 5px 3px rgb(57 57 57 / 0.4));
                 transform: scale(1.03);

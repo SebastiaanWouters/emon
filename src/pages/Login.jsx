@@ -21,13 +21,13 @@ export const Login = () => {
   const handlePkChange = (event) => {
     // 👇 Get input value from "event"
     setPk(event.target.value);
-  };
+  }
 
   return (
     <div className="loginContainer">
         <div className='column'>
         <img src={Bubble} width={600} className="speech-bubble"></img>
-        <LoginButton ></LoginButton>
+        <LoginButton></LoginButton>
         {pubkey !== "" && <Navigate to="/" replace={true} />}
         {width < 959 && <Navigate to="/mobile" replace={true} />}
         </div>
