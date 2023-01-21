@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [            
-        'prop-types',
+        '/prop-types',
       ],
     },
   },
