@@ -13,20 +13,22 @@ export const InvoiceCreator = ({hide}) => {
 
 
     async function createInvoice() {
-        try {
-            const webln = await requestProvider();
-            const invoice = await webln.makeInvoice({
+        try {  
+            if(typeof window.webln !== 'undefined') {
+                await window.webln.enable();
+                const webln = await requestProvider();
+                const invoice = await webln.makeInvoice({
                 amount: amount,
                 defaultMemo: desc
-              });
-            console.log(invoice.paymentRequest);
-            if (invoice.paymentRequest) {
-                publishEvent(invoice.paymentRequest);
-                hide();
+                });
+                if (invoice.paymentRequest) {
+                    publishEvent(invoice.paymentRequest);
+                    hide();
+                }
             }
-          } catch {
+        } catch {
 
-          }
+        }
     }
 
     return (
