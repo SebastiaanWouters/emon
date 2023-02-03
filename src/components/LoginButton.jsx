@@ -24,7 +24,7 @@ export const LoginButton = () => {
     const noExt = () => toast(
             (t) => (
             <span>
-                <button className="hover:text-purple-900" onClick={() => toast.dismiss(t.id)}><a href="https://nostr.how" target="_blank">You need a nostr browser extension to login, click here to learn more</a></button>
+                <button className="hover:text-purple-900" onClick={() => toast.dismiss(t.id)}><a href="https://blog.getalby.com/nostr-in-the-alby-extension/" target="_blank">You need a nostr browser extension to login, click here to learn more</a></button>
             </span>
             ),
             {

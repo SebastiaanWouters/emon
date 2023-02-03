@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
+    "cal-sans": "^1.0.1",
     "daisyui": "^2.46.1",
     "light-bolt11-decoder": "^2.1.0",
     "nord": "^0.2.1",

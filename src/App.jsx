@@ -5,6 +5,7 @@ import { userContext } from './contexts/useUserContext';
 import ChatContext from "./contexts/useChatContext";
 import NavigationContext from "./contexts/useNavigationContext";
 import { Route, Routes } from "react-router-dom";
+import "cal-sans";
 import "./styles/style.scss"
 import { MobileScreen } from "./pages/MobileScreen";
 
